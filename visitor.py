@@ -20,3 +20,6 @@ class Visitor():
             f'{self.gate_no}, {self.name}, {self.id}, ' + 
             f'{self.purpose}, {self.person_to_meet}')
 
+    def book(self):
+        print(f'Visitor with id {self.id} booked')
+

@@ -20,3 +20,11 @@ class File():
 
     def write_line(self, contents):
         self.write(contents + '\n')
+
+    def contents(self):
+        contents = ''
+
+        for line in self.file:
+            contents += line
+
+        return contents

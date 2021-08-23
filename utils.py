@@ -15,3 +15,6 @@ def get_user_input(msg='', accept_int=False):
 
         return user_input
         
+def convert_para_into_list_of_lines(paragraph):
+    return paragraph.split('\n')
+    
