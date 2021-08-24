@@ -15,7 +15,7 @@ class VisitorManagementSystem():
 
     def get_user_command(self):
         self.user_command = get_user_input(
-            'Please provide command number',
+            'Please provide command number : ',
             True
         )
 
@@ -24,9 +24,18 @@ class VisitorManagementSystem():
             self.add_new_visitor()
         elif self.user_command == 2:
             self.book_visitor()
+        elif self.user_command == 3:
+            self.check_entry()
+        elif self.user_command == 4:
+            self.print_summary()
             
     def add_new_visitor(self):
-        gate_no = get_user_input('Please provide gate no : ', True)
+        gate_no = get_user_input('Please provide gate no : (1,2,3,4 available)', True)
+        if not gate_no in range(1,5):
+            print('Invalid gate number:')
+            self.add_new_visitor()
+            return
+
         name = get_user_input('Please provide name : ')
         id = get_user_input('Please provide id : ')
         purpose = get_user_input('Please provide purpose : ')
@@ -41,8 +50,30 @@ class VisitorManagementSystem():
         visitor = visitor_service.get_visitor_by_id(visitor_id)
 
         if visitor:
-            print(visitor.name)
             visitor.book()
         else:
             print(f'No visitor found with id {visitor_id}')
 
+    def check_entry(self):
+        visitor_id = get_user_input('Please provide visitor id :')
+
+        visitor = visitor_service.get_visitor_by_id(visitor_id)
+
+        if not visitor:
+            print(f'No visitor with id {visitor_id} found.')
+
+            new_entry = input('Do you want to add new entry? (Yes/No) : ')
+
+            if new_entry.lower() == 'yes':
+                self.add_new_visitor()
+
+            return
+        
+        if visitor.booked:
+            print('Entry allowed!')
+
+        else:
+            print(f'Visitor with id {visitor_id} is not booked, Entry not allowed')
+
+    def print_summary(self):
+        visitor_service.print_summary()

@@ -1,3 +1,5 @@
+import json
+
 def get_user_input(msg='', accept_int=False):
 
         user_input = None
@@ -18,3 +20,10 @@ def get_user_input(msg='', accept_int=False):
 def convert_para_into_list_of_lines(paragraph):
     return paragraph.split('\n')
     
+def validate_json(json_string):
+    try:
+        json.loads(json_string)
+    except ValueError:
+        return False
+    else:
+        return True

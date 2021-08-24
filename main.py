@@ -12,7 +12,8 @@ if __name__ == '__main__':
             vms.get_user_command()
             
             vms.process_user_command()
-
+            print('\n'*2)
+            print('='*50)
     
     except KeyboardInterrupt:
         print('Shutting down the visitor management system')
